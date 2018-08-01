@@ -161,8 +161,14 @@ module.exports = (options = {}) => ({
             'vueModal': join(__dirname,'./src/js/plugins/vue-ui/modal'),
             'cookieUtils' : join(__dirname,'./src/js/util/cookie'),
             'easyuiCss' : join(__dirname,'./src/js/util/jquery-easyui/themes/default/easyui.css'),
-            'easyui': join(__dirname,'./src/js/util/jquery-easyui/jquery.easyui.min')
+            'easyui': join(__dirname,'./src/js/util/jquery-easyui/jquery.easyui.min'),
         }
+    },
+    externals: {
+    'vue': 'Vue',
+    'vue-router': 'VueRouter',
+    'vuex': 'Vuex',
+    'element-ui': 'ELEMENT',
     },
     devServer: {
         host: 'localhost',
