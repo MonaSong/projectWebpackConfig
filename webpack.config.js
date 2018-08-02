@@ -10,7 +10,6 @@ const publicPath = '/dist/'
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { VueLoaderPlugin } = require('vue-loader');
-console.log(process.env.NODE_ENV)
 module.exports = (options = {}) => ({
     mode: process.env.NODE_ENV == 'development'? 'development' : 'production',
     entry: {
@@ -157,11 +156,6 @@ module.exports = (options = {}) => ({
     resolve: {
         alias: {
             '~': resolve(__dirname, 'src'),
-            'base': join(__dirname,'./src/js/util/base.js'),
-            'vueModal': join(__dirname,'./src/js/plugins/vue-ui/modal'),
-            'cookieUtils' : join(__dirname,'./src/js/util/cookie'),
-            'easyuiCss' : join(__dirname,'./src/js/util/jquery-easyui/themes/default/easyui.css'),
-            'easyui': join(__dirname,'./src/js/util/jquery-easyui/jquery.easyui.min'),
         }
     },
     externals: {
