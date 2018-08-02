@@ -11,30 +11,18 @@
  */
 
 module.exports = function (req) {
-  var uid = req.query.uid
+  var uid = req.query.uid;
 
   if (!uid) {
     return {
       code: -1,
       msg: 'no uid'
-    }
+    };
   }
-
-  // return {
-  //   code: 0,
-  //   data: {
-  //     'uid': +uid,
-  //     'name': '@name',
-  //     'age|20-30': 1,
-  //     'email': '@email',
-  //     'date': '@date',
-  //     'img': '@image'
-  //   }
-  // }
 
   return {
     "code": 0,
-    "result|20": [
+    "result|3": [
       {
         "uid|+1": 1,
         "name": "@cname",
@@ -44,5 +32,5 @@ module.exports = function (req) {
         "date": "@date",
       }
     ]
-  }
-}
+  };
+};

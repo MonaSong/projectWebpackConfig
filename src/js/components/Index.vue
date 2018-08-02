@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <el-form label-width="100px">
+    <el-form label-width="100px" style="max-width: 500px;">
         <el-form-item label="用户姓名">
           <el-input type="input" v-model="uname"></el-input>
         </el-form-item>
@@ -32,39 +32,15 @@ export default {
       msg: '修改用户姓名',
       uname: '',
       tableName: '',
-      tableData: [{
-        uid: '1',
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 15弄',
-          email: '1123@qq.com',
-        }, {
-           uid: '2',
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄',
-          email: '1123@qq.com',
-        }, {
-           uid: '3',
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄',
-          email: '1123@qq.com',
-        }, {
-           uid: '4',
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄',
-          email: '1123@qq.com',
-        }],
+      tableData: [],
     }
   },
   components: {
     List
   },
   created () {
-    axios.get('/api/cur_user?uid=233').then((ret)=>{
-      this.tableName = ret.result;
+    axios.get('/api/user?uid=233').then((ret)=>{
+      this.tableData = ret.data.result;
     })
   },
   mounted () {
@@ -94,7 +70,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 .hello {
-  width: 600px;
+  width: 1000px;
 }
 h1, h2 {
   font-weight: normal;
