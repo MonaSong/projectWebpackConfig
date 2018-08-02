@@ -23,6 +23,8 @@
 
 <script>
 import List from './list.vue';
+import { mapActions } from 'vuex';
+import axios from 'axios';
 export default {
   name: 'HelloWorld',
   data () {
@@ -31,32 +33,53 @@ export default {
       uname: '',
       tableName: '',
       tableData: [{
+        uid: '1',
           date: '2016-05-02',
           name: '王小虎',
-          address: '上海市普陀区金沙江路 15弄'
+          address: '上海市普陀区金沙江路 15弄',
+          email: '1123@qq.com',
         }, {
+           uid: '2',
           date: '2016-05-04',
           name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄'
+          address: '上海市普陀区金沙江路 1517 弄',
+          email: '1123@qq.com',
         }, {
+           uid: '3',
           date: '2016-05-01',
           name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
+          address: '上海市普陀区金沙江路 1519 弄',
+          email: '1123@qq.com',
         }, {
+           uid: '4',
           date: '2016-05-03',
           name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
+          address: '上海市普陀区金沙江路 1516 弄',
+          email: '1123@qq.com',
         }],
     }
   },
   components: {
     List
   },
+  created () {
+    axios.get('/api/cur_user?uid=233').then((ret)=>{
+      this.tableName = ret.result;
+    })
+  },
   mounted () {
   },
   methods: {
+    ...mapActions([
+        'setUsername' // 映射 this.setUsername() 为 this.$store.dispatch('setUsername')
+    ]),
+    // ...mapActions({
+    //     setName: 'setUsername' // 映射 this.setName() 为 this.$store.dispatch('setUsername')
+    // }),
     onSubmit () {
-       this.$store.dispatch('setUsername', this.uname)
+       // this.$store.dispatch('setUsername', this.uname);
+       // this.setName(this.uname);
+       this.setUsername(this.uname);
     },
     onCheckInfo () {
       this.$router.push('/Info');
