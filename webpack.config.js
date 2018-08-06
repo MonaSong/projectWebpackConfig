@@ -23,6 +23,7 @@ module.exports = (options = {}) => ({
         publicPath: options.dev ? '/dist/' : '/dist/'
     },
     optimization: {
+        //runtimeChunk: 'single',
         runtimeChunk: {
           name: 'manifest'
         },
@@ -38,11 +39,11 @@ module.exports = (options = {}) => ({
            * 缓存组默认将node_modules中的模块拆分带一个叫做vendors的代码块中，将最少重复引用两次的模块放入default中。
           */ 
           cacheGroups: { // 缓存组。
-            default: {
-                minChunks: 2,
-                priority: -20,
-                reuseExistingChunk: true,
-            },
+            // default: {
+            //     minChunks: 2,
+            //     priority: -20,
+            //     reuseExistingChunk: true,
+            // },
             vendor: {
               name: 'vendor',
               chunks: 'initial',
@@ -103,7 +104,7 @@ module.exports = (options = {}) => ({
                 use: [{
                     loader: 'file-loader',
                     options: {
-                        name: '[name].[ext]?[hash]'
+                        name: '[name].[ext]?[hash:7]'
                     }
                 }]
             },

@@ -2,10 +2,13 @@
   <div class="hello">
     <el-form label-width="100px" style="max-width: 500px;">
         <el-form-item label="用户姓名">
-          <el-input type="input" v-model="uname"></el-input>
+          <el-input type="input" v-model="uname" v-focus></el-input>
         </el-form-item>
         <el-form-item label="当前用户名">
          <p>{{this.$store.state.users.name|ff}}</p>
+        </el-form-item>
+        <el-form-item>
+          <img src="../../assets/img/图片1.png" alt="">
         </el-form-item>
         <el-form-item abel="">
           <el-button type="primary" @click="onSubmit">保存</el-button>
@@ -23,7 +26,7 @@
 </template>
 
 <script>
-// import List from './list.vue';
+import List from './list.vue';
 import { mapActions } from 'vuex';
 import axios from 'axios';
 // let demo = null;
@@ -38,8 +41,16 @@ export default {
       dd: null,
     }
   },
+  directives: {
+    focus: {
+      // 指令的定义
+      inserted: function (el) {
+        el.focus();
+      }
+    }
+  },
   components: {
-    List:  () => import('./List.vue'),
+    // List:  () => import('./List.vue'),
   },
   created () {
     axios.get('http://localhost:8090/api/user?uid=233').then((ret)=>{
@@ -54,6 +65,9 @@ export default {
   mounted () {
   },
   methods: {
+    hs () {
+      console.log('hh')
+    },
     ...mapActions([
         'setUsername' // 映射 this.setUsername() 为 this.$store.dispatch('setUsername')
     ]),
