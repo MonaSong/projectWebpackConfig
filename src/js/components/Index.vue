@@ -5,7 +5,7 @@
           <el-input type="input" v-model="uname"></el-input>
         </el-form-item>
         <el-form-item label="当前用户名">
-         <p>{{this.$store.state.users.name}}</p>
+         <p>{{this.$store.state.users.name|ff}}</p>
         </el-form-item>
         <el-form-item abel="">
           <el-button type="primary" @click="onSubmit">保存</el-button>
@@ -18,13 +18,17 @@
     <br>
     <p>{{tableName}}</p>
     <list :listData="tableData" @setTitle="onSetTitle"></list>
+    <br>
+
+    <demo></demo>
   </div>
 </template>
 
 <script>
-import List from './list.vue';
+// import List from './list.vue';
 import { mapActions } from 'vuex';
 import axios from 'axios';
+// let demo = null;
 export default {
   name: 'HelloWorld',
   data () {
@@ -33,15 +37,28 @@ export default {
       uname: '',
       tableName: '',
       tableData: [],
+      dd: null,
     }
   },
   components: {
-    List
+    List:  () => import('./List.vue'),
+    Demo: () => import('./Demo.vue')
   },
   created () {
-    axios.get('/api/user?uid=233').then((ret)=>{
-      this.tableData = ret.data.result;
-    })
+    // axios.get('/api/user?uid=233').then((ret)=>{
+    //   this.tableData = ret.data.result;
+    // })
+
+    // require.ensure([], require => {
+    //   this.dd = require('./demo.vue');
+    //   console.log('demo', demo);
+    //   // demo.show();
+    // }, 'demo');
+  },
+  filters: {
+    ff (v) {
+      return v+'mona.song'
+    }
   },
   mounted () {
   },
@@ -53,9 +70,9 @@ export default {
     //     setName: 'setUsername' // 映射 this.setName() 为 this.$store.dispatch('setUsername')
     // }),
     onSubmit () {
-       // this.$store.dispatch('setUsername', this.uname);
+        this.$store.dispatch('setUsername', this.uname);
        // this.setName(this.uname);
-       this.setUsername(this.uname);
+       //this.setUsername(this.uname);
     },
     onCheckInfo () {
       this.$router.push('/Info');
