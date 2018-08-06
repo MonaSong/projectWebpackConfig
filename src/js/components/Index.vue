@@ -19,8 +19,6 @@
     <p>{{tableName}}</p>
     <list :listData="tableData" @setTitle="onSetTitle"></list>
     <br>
-
-    <demo></demo>
   </div>
 </template>
 
@@ -42,18 +40,11 @@ export default {
   },
   components: {
     List:  () => import('./List.vue'),
-    Demo: () => import('./Demo.vue')
   },
   created () {
-    // axios.get('/api/user?uid=233').then((ret)=>{
-    //   this.tableData = ret.data.result;
-    // })
-
-    // require.ensure([], require => {
-    //   this.dd = require('./demo.vue');
-    //   console.log('demo', demo);
-    //   // demo.show();
-    // }, 'demo');
+    axios.get('http://localhost:8090/api/user?uid=233').then((ret)=>{
+      this.tableData = ret.data.result;
+    })
   },
   filters: {
     ff (v) {

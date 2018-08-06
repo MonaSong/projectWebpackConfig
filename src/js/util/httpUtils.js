@@ -88,10 +88,3 @@ const  HTTPUtilsInstance = new HTTPUtils;
 export const request = HTTPUtilsInstance.request.bind(HTTPUtilsInstance);
 export const get = HTTPUtilsInstance.get.bind(HTTPUtilsInstance);
 export const post = HTTPUtilsInstance.post.bind(HTTPUtilsInstance);
-
-
-
-
-
-
-
