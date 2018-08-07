@@ -59,7 +59,7 @@ module.exports = (options = {}) => ({
           loader: 'vue-loader',
           options: {
               transformToRequire: {
-                  "audio": "src"
+                "audio": "src"
               }
           }
       }]
@@ -72,19 +72,19 @@ module.exports = (options = {}) => ({
     {
       test: /\.html$/,
       use: [{
-          loader: 'html-loader',
-          options: {
-              root: resolve(__dirname, 'src'),
-              attrs: ['img:src', 'link:href']
-          }
+        loader: 'html-loader',
+        options: {
+          root: resolve(__dirname, 'src'),
+          attrs: ['img:src', 'link:href']
+        }
       }]
     },
     {
       test: /\.less$/,
       use:[
-          "style-loader",
-          "css-loader",
-          "less-loader",
+        "style-loader",
+        "css-loader",
+        "less-loader",
       ]
     },
     {
@@ -95,10 +95,10 @@ module.exports = (options = {}) => ({
     {
       test: /favicon\.png$/,
       use: [{
-          loader: 'file-loader',
-          options: {
-              name: '[name].[ext]?[hash:7]'
-          }
+        loader: 'file-loader',
+        options: {
+            name: '[name].[ext]?[hash:7]'
+        }
       }]
     },
     {
@@ -121,54 +121,54 @@ module.exports = (options = {}) => ({
     }]
   },
   plugins:
-      options.dev ?
-          [
-            new VueLoaderPlugin(),
-            new HtmlWebpackPlugin({
-                filename: options.dev ? 'index.html' : '../index.html',
-                favicon: resolve('favicon.png'),
-                template: 'src/index.html'
-            }),
-          ]
-          :
-          [
-            new VueLoaderPlugin(),
-            new HtmlWebpackPlugin({
-                filename: options.dev ? 'index.html' : '../index.html',
-                favicon: resolve('favicon.png'),
-                template: 'src/index.html'
-            }),
-            new MiniCssExtractPlugin({
-                filename: "[name].css",
-                chunkFilename: "[id].css"
-            })
-          ],
-  resolve: {
-    alias: {
-        '~': resolve(__dirname, 'src'),
-    }
-  },
-  externals: {
-    'vue': 'Vue',
-    'vue-router': 'VueRouter',
-    'vuex': 'Vuex',
-    'element-ui': 'ELEMENT',
-  },
-  devServer: {
-    host: 'localhost',
-    port: 8011,
-    proxy: {
-        '/api/': {
-            target: 'http://localhost:8090',
-            changeOrigin: true,
-            pathRewrite: {
-                '^/api': ''
-            }
+    options.dev ?
+      [
+        new VueLoaderPlugin(),
+        new HtmlWebpackPlugin({
+          filename: options.dev ? 'index.html' : '../index.html',
+          favicon: resolve('favicon.png'),
+          template: 'src/index.html'
+        }),
+      ]
+      :
+      [
+        new VueLoaderPlugin(),
+        new HtmlWebpackPlugin({
+          filename: options.dev ? 'index.html' : '../index.html',
+          favicon: resolve('favicon.png'),
+          template: 'src/index.html'
+        }),
+        new MiniCssExtractPlugin({
+          filename: "[name].css",
+          chunkFilename: "[id].css"
+        })
+      ],
+resolve: {
+  alias: {
+    '~': resolve(__dirname, 'src'),
+  }
+},
+externals: {
+  'vue': 'Vue',
+  'vue-router': 'VueRouter',
+  'vuex': 'Vuex',
+  'element-ui': 'ELEMENT',
+},
+devServer: {
+  host: 'localhost',
+  port: 8011,
+  proxy: {
+    '/api/': {
+        target: 'http://localhost:8090',
+        changeOrigin: true,
+        pathRewrite: {
+            '^/api': ''
         }
-    },
-    historyApiFallback: {
-      index: url.parse(options.dev ? '/dist/' : publicPath).pathname
     }
   },
+  historyApiFallback: {
+    index: url.parse(options.dev ? '/dist/' : publicPath).pathname
+  }
+},
   devtool: options.dev ? '#eval-source-map' : '#source-map'
 });
