@@ -1,19 +1,19 @@
 <template>
   <div class="hello">
     <el-form label-width="100px" style="max-width: 500px;">
-        <el-form-item label="用户姓名">
-          <el-input type="input" v-model="uname" v-focus></el-input>
-        </el-form-item>
-        <el-form-item label="当前用户名">
-         <p>{{this.$store.state.users.name|ff}}</p>
-        </el-form-item>
-        <el-form-item>
-          <img src="../../assets/img/图片1.png" alt="">
-        </el-form-item>
-        <el-form-item abel="">
-          <el-button type="primary" @click="onSubmit">保存</el-button>
-          <el-button type="primary" @click="onCheckInfo">查看详情</el-button>
-        </el-form-item>
+      <el-form-item label="用户姓名">
+        <el-input type="input" v-model="uname" v-focus></el-input>
+      </el-form-item>
+      <el-form-item label="当前用户名">
+        <p>{{this.$store.state.users.name|ff}}</p>
+      </el-form-item>
+      <el-form-item>
+        <img src="../../assets/img/图片1.png" alt="">
+      </el-form-item>
+      <el-form-item abel="">
+        <el-button type="primary" @click="onSubmit">保存</el-button>
+        <el-button type="primary" @click="onCheckInfo">查看详情</el-button>
+      </el-form-item>
     </el-form>
 
     <br>
@@ -26,9 +26,10 @@
 </template>
 
 <script>
-import List from './list.vue';
+//import List from './list.vue';
 import { mapActions } from 'vuex';
 import axios from 'axios';
+import { getUser } from '../api/users';
 // let demo = null;
 export default {
   name: 'HelloWorld',
@@ -50,12 +51,12 @@ export default {
     }
   },
   components: {
-    // List:  () => import('./List.vue'),
+     List:  () => import('./List.vue'),
   },
   created () {
-    axios.get('http://localhost:8090/api/user?uid=233').then((ret)=>{
-      this.tableData = ret.data.result;
-    })
+    getUser().then(ret => {
+      this.tableData = ret.result;
+    });
   },
   filters: {
     ff (v) {
