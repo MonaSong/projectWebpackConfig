@@ -6,12 +6,7 @@ import ElementUI from 'element-ui';
 import store from './store/index';
 
 Vue.use(ElementUI);
-Vue.config.productionTip = false
-
-Vue.prototype.ft = (v) => {
-  //..
-  console.log('全局方法')
-}
+Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
 new Vue({

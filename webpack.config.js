@@ -1,15 +1,14 @@
 const  {
   resolve,
   join,
-} = require('path')
+} = require('path');
 
-//const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const url = require('url');
 const publicPath = '/dist/';
-//const ExtractTextPlugin = require("extract-text-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { VueLoaderPlugin } = require('vue-loader');
+
 module.exports = (options = {}) => ({
   mode: process.env.NODE_ENV == 'development'? 'development' : 'production',
   entry: {
@@ -23,7 +22,6 @@ module.exports = (options = {}) => ({
     publicPath: options.dev ? '/dist/' : '/dist/'
   },
   optimization: {
-    //runtimeChunk: 'single',
     runtimeChunk: {
       name: 'manifest'
     },
@@ -91,12 +89,7 @@ module.exports = (options = {}) => ({
     },
     {
       test: /\.css$/,
-      // use: options.dev ? ['style-loader', 'css-loader', 'postcss-loader'] : ExtractTextPlugin.extract({
-      //     fallback: "style-loader",
-      //     use: "css-loader"
-      // })
-      use: options.dev ? ['vue-style-loader', 'css-loader', 'postcss-loader'] : [MiniCssExtractPlugin.loader, 'css-loader?importLoaders=1', 'postcss-loader?importLoaders=1'] // style-loader 改为 vue-style-loader
-      // use: [ 'style-loader', 'css-loader', 'postcss-loader']
+      use: options.dev ? ['vue-style-loader', 'css-loader', 'postcss-loader'] : [MiniCssExtractPlugin.loader, 'css-loader?importLoaders=1', 'postcss-loader?importLoaders=1']
 
     },
     {
@@ -125,15 +118,11 @@ module.exports = (options = {}) => ({
         limit: 10000,
         name: '[name].[hash:7].[ext]'
       }
-    }
-      ]
+    }]
   },
   plugins:
       options.dev ?
           [
-            // new webpack.optimize.CommonsChunkPlugin({
-            //     names: ['vendor', 'manifest']
-            // }), // TODO -
             new VueLoaderPlugin(),
             new HtmlWebpackPlugin({
                 filename: options.dev ? 'index.html' : '../index.html',
@@ -143,25 +132,16 @@ module.exports = (options = {}) => ({
           ]
           :
           [
-            // new webpack.optimize.CommonsChunkPlugin({
-            //     names: ['vendor', 'manifest']
-            // }), //TODO -
-            new VueLoaderPlugin(), // TODO +
+            new VueLoaderPlugin(),
             new HtmlWebpackPlugin({
                 filename: options.dev ? 'index.html' : '../index.html',
                 favicon: resolve('favicon.png'),
                 template: 'src/index.html'
             }),
-            // new ExtractTextPlugin({
-            //     filename: "main.css?[hash]",
-            //     allChunks: true,
-            // }),
             new MiniCssExtractPlugin({
-                // Options similar to the same options in webpackOptions.output
-                // both options are optional
                 filename: "[name].css",
                 chunkFilename: "[id].css"
-            }) // TODO +
+            })
           ],
   resolve: {
     alias: {
@@ -191,4 +171,4 @@ module.exports = (options = {}) => ({
     }
   },
   devtool: options.dev ? '#eval-source-map' : '#source-map'
-})
+});

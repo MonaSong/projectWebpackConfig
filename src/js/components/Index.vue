@@ -26,11 +26,9 @@
 </template>
 
 <script>
-//import List from './list.vue';
 import { mapActions } from 'vuex';
 import axios from 'axios';
 import { getUser } from '../api/users';
-// let demo = null;
 export default {
   name: 'HelloWorld',
   data () {
@@ -70,15 +68,11 @@ export default {
       console.log('hh')
     },
     ...mapActions([
-        'setUsername' // 映射 this.setUsername() 为 this.$store.dispatch('setUsername')
+        'setUsername' 
     ]),
-    // ...mapActions({
-    //     setName: 'setUsername' // 映射 this.setName() 为 this.$store.dispatch('setUsername')
-    // }),
+
     onSubmit () {
         this.$store.dispatch('setUsername', this.uname);
-       // this.setName(this.uname);
-       //this.setUsername(this.uname);
     },
     onCheckInfo () {
       this.$router.push('/Info');
@@ -90,7 +84,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 .hello {
   width: 1000px;
